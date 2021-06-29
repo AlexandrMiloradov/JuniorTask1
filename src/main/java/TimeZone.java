@@ -1,7 +1,7 @@
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class timeZone {
+public class TimeZone {
     private double offset;
     private String name;
     private String abbr;
