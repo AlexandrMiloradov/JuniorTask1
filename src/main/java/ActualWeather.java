@@ -5,7 +5,7 @@ public class ActualWeather extends InfoWeather {
 
     private double temp;
     private String season;
-    private double obs_time;
+    private double obsTime;
 
     public double getTemp() {
         return temp;
@@ -24,10 +24,10 @@ public class ActualWeather extends InfoWeather {
     }
 
     public double getObs_time() {
-        return obs_time;
+        return obsTime;
     }
 
-    public void setObs_time(double obs_time) {
-        this.obs_time = obs_time;
+    public void setObs_time(double obsTime) {
+        this.obsTime = obsTime;
     }
 }
