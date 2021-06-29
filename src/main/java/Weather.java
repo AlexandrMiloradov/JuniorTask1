@@ -116,7 +116,11 @@ public class Weather {
         urlConnector.openConnection();
         urlConnector.setTheHeadersToUrl(getNameApiKey(), getApiKey());
         StringReader stringReader = urlConnector.getAnswerFromUrl();
-        getWeatherFromJsonString(stringReader);
+        if (stringReader == null){
+            throw new APIYandexExceptions("Wrong url address");
+        } else {
+            getWeatherFromJsonString(stringReader);
+        }
     }
 
     public void getWeatherFromJsonString(StringReader stringReader) throws IOException {
