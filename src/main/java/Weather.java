@@ -101,9 +101,9 @@ public class Weather {
     private void setTempAvg(){
         int i = 0;
         double temp_avg = 0;
-        for (Forecast forecast:forecasts) {
-            InfoWeather day_forecast = forecast.getParts().getDay();
-            temp_avg = temp_avg+day_forecast.getTempAvg();
+        for (i = 0; i < forecasts.size(); i ++) {
+            InfoWeather day_forecast = forecasts.get(i).getParts().getDay();
+            temp_avg += day_forecast.getTempAvg();
             i++;
         }
         if (i!=0){
