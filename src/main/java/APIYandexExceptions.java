@@ -1,6 +1,6 @@
-import java.io.IOException;
 
-public class APIYandexExceptions extends IOException {
+
+public class APIYandexExceptions extends Exception {
 
     APIYandexExceptions(String message){
         super(message);

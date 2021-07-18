@@ -4,6 +4,8 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.Map;
 
 public class UrlConnector {
 
@@ -27,11 +29,24 @@ public class UrlConnector {
         this.urlString = urlString;
     }
 
-    public void setTheHeadersToUrl(String nameHeader, String valueHeader){
-            con.setRequestProperty(nameHeader, valueHeader);
+    private void setTheHeadersToUrl(Map<String, String> headers){
+        for (Map.Entry<String, String> entry: headers.entrySet()){
+            con.setRequestProperty(entry.getKey(), entry.getValue());
+        }
     }
 
-    public void openConnection() throws IOException{
+    private void setTheParamsToUrl(Map<String, String> params){
+        Iterator<Map.Entry<String, String>> itr = params.entrySet().iterator();
+        while(itr.hasNext()) {
+            Map.Entry<String, String> entry =  itr.next();
+            urlString += entry.getKey()+"="+entry.getValue();
+            if (itr.hasNext()){
+                urlString +="&";
+            }
+        }
+    }
+
+    private void openConnection() throws IOException{
         try{
             url = new URL(urlString);
             con = (HttpURLConnection) url.openConnection();
@@ -41,7 +56,7 @@ public class UrlConnector {
         }
     }
 
-    public StringReader getAnswerFromUrl()  {
+    private StringReader getAnswerFromUrl()  {
         StringReader stringReader = null;
         try (final BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
             String inputLine;
@@ -51,10 +66,18 @@ public class UrlConnector {
                 stringReader = new StringReader(inputLine);
             }
         } catch (final Exception ex) {
-            ex.printStackTrace();
+            ex.getMessage();
         }
 
         return stringReader;
+    }
+
+    public StringReader sendRequest(RequestData requestData) throws IOException {
+
+        setTheParamsToUrl(requestData.getParams());
+        openConnection();
+        setTheHeadersToUrl(requestData.getHeaders());
+        return getAnswerFromUrl();
     }
 
 }
