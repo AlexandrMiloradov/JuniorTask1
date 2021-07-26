@@ -56,17 +56,21 @@ public class UrlConnector {
         }
     }
 
-    private StringReader getAnswerFromUrl()  {
+    private StringReader getAnswerFromUrl() throws IOException, UrlConnectorException {
         StringReader stringReader = null;
-        try (final BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+
+        int responseCode = con.getResponseCode();
+
+        if (responseCode == 200){
+            final BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
             final StringBuilder content = new StringBuilder();
             while ((inputLine = in.readLine()) != null) {
                 content.append(inputLine);
                 stringReader = new StringReader(inputLine);
             }
-        } catch (final Exception ex) {
-            ex.getMessage();
+        } else {
+           throw new UrlConnectorException("Server send request with "+"["+Integer.toString(responseCode)+"] code");
         }
 
         return stringReader;

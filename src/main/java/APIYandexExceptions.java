@@ -1,8 +1,10 @@
 
 
-public class APIYandexExceptions extends Exception {
+public class APIYandexExceptions extends UrlConnectorException {
 
-    APIYandexExceptions(String message){
+    String message;
+
+    APIYandexExceptions(String message) {
         super(message);
     }
 }
