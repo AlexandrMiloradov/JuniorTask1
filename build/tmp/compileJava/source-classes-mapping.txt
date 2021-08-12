@@ -1,31 +1,39 @@
-TimeZone.java
- TimeZone
-WeatherService.java
- WeatherService
-InfoWeather.java
- InfoWeather
-FilterYandexWeatherData.java
- FilterYandexWeatherData
-Forecast.java
- Forecast
-ActualWeather.java
- ActualWeather
-PartsOfWeather.java
- PartsOfWeather
-Weather.java
- Weather
-RequestData.java
- RequestData
-InfoPlace.java
- InfoPlace
-APIYandexExceptions.java
- APIYandexExceptions
-Start.java
- Start
 UrlConnectorException.java
  UrlConnectorException
 UrlConnector.java
  UrlConnector
+InfoWeather.java
+ InfoWeather
+FilterYandexWeatherData.java
+ FilterYandexWeatherData
+APIYandexExceptions.java
+ APIYandexExceptions
+ActualWeather.java
+ ActualWeather
+PartsOfWeather.java
+ PartsOfWeather
 YandexWeatherService.java
  YandexWeatherService
  YandexWeatherService$1
+RequestData.java
+ RequestData
+InfoPlace.java
+ InfoPlace
+Weather.java
+ Weather
+SweetBotService.java
+ SweetBotService
+WeatherService.java
+ WeatherService
+TimeZone.java
+ TimeZone
+Forecast.java
+ Forecast
+Start.java
+ Start
+UrlConnectorService.java
+ UrlConnectorService
+BotStart.java
+ BotStart
+SweetBot.java
+ SweetBot

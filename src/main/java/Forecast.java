@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 public class Forecast  {
 
     private String date;
+    @JsonProperty("date_ts")
     private long dateTs;
     private PartsOfWeather parts;
 
@@ -27,7 +28,6 @@ public class Forecast  {
         return dateTs;
     }
 
-    @JsonSetter("date_ts")
     public void setDateTs(long date_ts) {
         this.dateTs = date_ts;
     }

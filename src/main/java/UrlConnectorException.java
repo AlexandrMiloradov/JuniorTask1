@@ -1,6 +1,6 @@
-import java.io.IOException;
 
-public class UrlConnectorException extends IOException {
+
+public class UrlConnectorException extends RuntimeException {
 
     String message;
 

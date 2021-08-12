@@ -15,6 +15,9 @@ dependencies {
 
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.4.6'
 
+    implementation 'org.telegram:telegrambots:5.3.0'
+
+   // implementation 'org.apache.cassandra:cassandra-all:0.8.1'
 }
 
 test {

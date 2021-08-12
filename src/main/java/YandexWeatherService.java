@@ -7,22 +7,19 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class YandexWeatherService {
-
     private final static String nameApiKey = "X-Yandex-API-Key";
-    private final static String apiKey = "db6702a8-84a2-4bf0-89f4-445912306ab1"; //0
+    private final static String apiKey = "db6702a8-84a2-4bf0-89f4-445912306ab0"; //0
     private final static String url = "https://api.weather.yandex.ru/v2/forecast?";
-
     private static Weather getWeatherFromJsonString(StringReader stringReader) throws IOException {
-
         Weather weather = new Weather();
-
         ObjectMapper jmap = new ObjectMapper();
         weather = jmap.readValue(stringReader, new TypeReference<Weather>() {
         });
+        weather.setTempAvg(WeatherService.getTempAvg(weather.getForecasts()));
         return weather;
     }
 
-    public static Weather getWeatherForPlace(FilterYandexWeatherData filterYandexWeatherData) throws IOException, APIYandexExceptions {
+    public static Weather getWeatherForPlace(FilterYandexWeatherData filterYandexWeatherData) throws IOException, APIYandexExceptions, UrlConnectorException {
 
         UrlConnector urlConnector = new UrlConnector(url);
 
@@ -40,17 +37,14 @@ public class YandexWeatherService {
         Weather weather = null;
         try{
             stringAnswer = urlConnector.sendRequest(requestData);
+            weather = getWeatherFromJsonString(stringAnswer);
+            weather.setTempAvg(WeatherService.getTempAvg(weather.getForecasts()));
         }
-        catch (APIYandexExceptions ex){
-            System.out.println(ex.getMessage());
+        catch (UrlConnectorException ex){
+            String message = ex.getMessage();
+            System.out.println(message);
         }
         catch (IOException ex){
-            System.out.println(ex.getMessage());
-        }
-
-        try{
-            weather = getWeatherFromJsonString(stringAnswer);
-        } catch (IOException ex){
             System.out.println(ex.getMessage());
         }
 

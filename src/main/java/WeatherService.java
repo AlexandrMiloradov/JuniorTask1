@@ -9,25 +9,22 @@ import java.util.List;
 
 public class WeatherService {
 
-    public static void setTempAvg(Weather weather){
+    public static double getTempAvg(List<Forecast> forecasts){
 
         int i = 0;
         double temp_avg = 0;
-        List<Forecast> forecasts = weather.getForecasts();
         for (i = 0; i < forecasts.size(); i ++) {
             InfoWeather day_forecast = forecasts.get(i).getParts().getDay();
             temp_avg += day_forecast.getTempAvg();
             i++;
         }
-        if (i!=0){
-            weather.setTempAvg(temp_avg/i);
-        }
 
+        return temp_avg;
     }
 
     public static void writeRequest(Weather weather, String catalog) throws IOException {
-        FileWriter fileWriter = new FileWriter(catalog);
-        try{
+
+        try{ FileWriter fileWriter = new FileWriter(catalog);
             String jsonString;
             ObjectMapper jsonMapper = new ObjectMapper();
             jsonString = jsonMapper.writeValueAsString(weather);
@@ -35,8 +32,6 @@ public class WeatherService {
             StringReader stringReader = new StringReader("");
         } catch (FileNotFoundException | FileAlreadyExistsException ex){
             ex.getMessage();
-        } finally {
-            fileWriter.close();
         }
     }
 }

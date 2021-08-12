@@ -1,11 +1,7 @@
-import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +10,7 @@ public class Weather {
 
     private int now;
 
+    @JsonProperty("now_dt")
     private String nowDt;
     private InfoPlace info;
     private List<Forecast> forecasts = new ArrayList<>();
@@ -60,12 +57,12 @@ public class Weather {
         this.now = now;
     }
 
-    @JsonGetter("nowDt")
+  //  @JsonGetter("nowDt")
     public String getNowDt() {
         return nowDt;
     }
 
-    @JsonSetter("now_dt")
+  //  @JsonSetter("now_dt")
     public void setNowDt(String nowDt) {
         this.nowDt = nowDt;
     }
@@ -93,19 +90,4 @@ public class Weather {
     public void setTempAvg(double tempAvg) {
         this.tempAvg = tempAvg;
     }
-
-    public static void writeRequest(Weather weather, String catalog) throws IOException {
-        final char dm = (char) 34;
-        String jsonString;
-        ObjectMapper jsonMapper = new ObjectMapper();
-        jsonString = jsonMapper.writeValueAsString(weather)+",";
-        jsonString = jsonString.substring(0, jsonString.length()-1) + "]}";
-        FileWriter fileWriter = new FileWriter(catalog);
-        fileWriter.write(jsonString);
-        fileWriter.close();
-
-        StringReader stringReader = new StringReader("");
-
-    }
-
 }

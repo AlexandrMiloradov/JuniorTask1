@@ -1,6 +1,4 @@
-
-
-public class APIYandexExceptions extends UrlConnectorException {
+public class APIYandexExceptions extends RuntimeException {
 
     String message;
 
